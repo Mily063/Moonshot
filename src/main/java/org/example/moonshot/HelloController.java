@@ -1,14 +1,19 @@
 package org.example.moonshot;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javax.swing.*;
+import java.util.List;
+import org.example.moonshot.models.Mission;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
+    private final List<Mission> missions;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    public HelloController(List<Mission> missions) {
+        this.missions = missions;
+        showMissionScreen();
+    }
+
+    private void showMissionScreen() {
+        JFrame missionScreen = new MissionScreen(missions);
+        missionScreen.setVisible(true);
     }
 }

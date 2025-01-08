@@ -1,23 +1,22 @@
 package org.example.moonshot;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javax.swing.*;
+import java.util.List;
+import org.example.moonshot.models.Mission;
+import org.example.moonshot.utils.DataLoader;
 
-import java.io.IOException;
-
-public class HelloApplication extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-    }
-
+public class HelloApplication {
     public static void main(String[] args) {
-        launch();
+        // Wczytanie danych z JSON
+        List<Mission> missions = DataLoader.loadMissions("src/main/resources/missions.json");
+
+        // Uruchomienie aplikacji Swing
+        SwingUtilities.invokeLater(() -> {
+            if (missions != null) {
+                new HelloController(missions);
+            } else {
+                JOptionPane.showMessageDialog(null, "Nie udało się wczytać danych JSON.", "Błąd", JOptionPane.ERROR_MESSAGE);
+            }
+        });
     }
 }
