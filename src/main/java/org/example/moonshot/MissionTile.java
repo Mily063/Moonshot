@@ -3,6 +3,8 @@ package org.example.moonshot;
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.example.moonshot.models.Mission;
@@ -11,7 +13,7 @@ import java.util.Date;
 public class MissionTile extends JPanel {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-    public MissionTile(Mission mission) {
+    public MissionTile(Mission mission, MainScreen mainScreen) {
         setLayout(new BorderLayout());
         setBackground(new Color(30, 30, 50));
         setBorder(new RoundedBorder(15)); // Set rounded border with radius 15
@@ -62,6 +64,14 @@ public class MissionTile extends JPanel {
         add(imageLabel, BorderLayout.CENTER);
         add(numberLabel, BorderLayout.SOUTH);
         add(dateLabel, BorderLayout.SOUTH);
+
+        // Add mouse click listener to switch to MissionDetailScreen
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                mainScreen.showMissionDetail(mission);
+            }
+        });
     }
 
     // Custom border class for rounded corners

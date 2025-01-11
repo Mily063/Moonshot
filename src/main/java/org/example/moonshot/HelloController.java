@@ -13,7 +13,7 @@ public class HelloController {
     }
 
     private void showMissionScreen() {
-        JFrame missionScreen = new MissionScreen(missions);
+        JFrame missionScreen = new MainScreen(missions);
         missionScreen.setVisible(true);
     }
 }

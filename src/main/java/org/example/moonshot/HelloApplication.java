@@ -7,15 +7,15 @@ import org.example.moonshot.utils.DataLoader;
 
 public class HelloApplication {
     public static void main(String[] args) {
-        // Wczytanie danych z JSON
+        // Load data from JSON
         List<Mission> missions = DataLoader.loadMissions("src/main/resources/missions.json");
 
-        // Uruchomienie aplikacji Swing
+        // Start the Swing application
         SwingUtilities.invokeLater(() -> {
             if (missions != null) {
                 new HelloController(missions);
             } else {
-                JOptionPane.showMessageDialog(null, "Nie udało się wczytać danych JSON.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Failed to load JSON data.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
