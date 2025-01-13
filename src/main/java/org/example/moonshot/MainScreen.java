@@ -35,7 +35,7 @@ public class MainScreen extends JFrame {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         mainPanel.add(scrollPane, "MissionPanel");
-        missionDetailScreen = new MissionScreen();
+        missionDetailScreen = new MissionScreen(this);
         mainPanel.add(missionDetailScreen, "MissionDetailScreen");
 
         add(mainPanel);
