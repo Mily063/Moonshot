@@ -1,0 +1,77 @@
+@startuml
+class Mission {
+    - int id
+    - String name
+    - String launchDate
+    - String description
+    - List<CrewMember> crew
+    --
+    + int getId()
+    + void setId(int id)
+    + String getName()
+    + void setName(String name)
+    + String getLaunchDate()
+    + void setLaunchDate(String launchDate)
+    + String getDescription()
+    + void setDescription(String description)
+    + List<CrewMember> getCrew()
+    + void setCrew(List<CrewMember> crew)
+}
+
+class CrewMember {
+    - String name
+    - String role
+    --
+    + String getName()
+    + void setName(String name)
+    + String getRole()
+    + void setRole(String role)
+}
+
+class DataLoader {
+    + static List<Mission> loadMissions(String filePath)
+}
+
+class MainScreen {
+    - CardLayout cardLayout
+    - JPanel mainPanel
+    - JPanel missionPanel
+    - MissionScreen missionDetailScreen
+    --
+    + MainScreen(List<Mission> missions)
+    + void showMissionDetail(Mission mission)
+    + void showMissionPanel()
+}
+
+class MissionScreen {
+    - JButton backButton
+    - JLabel titleLabel
+    - JLabel dateLabel
+    - JTextArea descriptionArea
+    - JLabel imageLabel
+    - MainScreen mainScreen
+    - JPanel crewPanel
+    --
+    + MissionScreen(MainScreen mainScreen)
+    + void updateMissionDetails(Mission mission)
+}
+
+class MissionTile {
+    - static final SimpleDateFormat DATE_FORMAT
+    --
+    + MissionTile(Mission mission, MainScreen mainScreen)
+}
+
+class HelloApplication {
+    + static void main(String[] args)
+}
+
+class HelloController {
+    + HelloController(List<Mission> missions)
+}
+
+Mission "1" -- "0..*" CrewMember : has
+MainScreen "1" -- "1" MissionScreen : contains
+MainScreen "1" -- "0..*" MissionTile : contains
+MissionScreen "1" -- "0..*" CrewMember : displays
+@enduml
