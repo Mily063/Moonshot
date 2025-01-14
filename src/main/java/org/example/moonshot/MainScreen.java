@@ -4,23 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import org.example.moonshot.models.Mission;
+import org.example.moonshot.models.CrewMember;
 
 public class MainScreen extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    private JPanel missionPanel;
     private MissionScreen missionDetailScreen;
+    private AstronautDetailScreen astronautDetailScreen;
 
     public MainScreen(List<Mission> missions) {
         setTitle("Moonshot - Mission Viewer");
-        setSize(1200, 800); // Adjust window size
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Set the frame to full screen
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
         // Set a darker background color
-        missionPanel = new JPanel();
+        JPanel missionPanel = new JPanel();
         missionPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Use GridLayout with two columns
         missionPanel.setBackground(new Color(20, 20, 40));
 
@@ -38,6 +39,9 @@ public class MainScreen extends JFrame {
         missionDetailScreen = new MissionScreen(this);
         mainPanel.add(missionDetailScreen, "MissionDetailScreen");
 
+        astronautDetailScreen = new AstronautDetailScreen(this);
+        mainPanel.add(astronautDetailScreen, "AstronautDetailScreen");
+
         add(mainPanel);
     }
 
@@ -48,5 +52,10 @@ public class MainScreen extends JFrame {
 
     public void showMissionPanel() {
         cardLayout.show(mainPanel, "MissionPanel");
+    }
+
+    public void showAstronautDetail(CrewMember crewMember) {
+        astronautDetailScreen.updateAstronautDetails(crewMember);
+        cardLayout.show(mainPanel, "AstronautDetailScreen");
     }
 }
