@@ -20,17 +20,14 @@ public class MainScreen extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        // Set a darker background color
         JPanel missionPanel = new JPanel();
-        missionPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Use GridLayout with two columns
+        missionPanel.setLayout(new GridLayout(0, 2, 10, 10));
         missionPanel.setBackground(new Color(20, 20, 40));
 
-        // Add tiles for each mission
         for (Mission mission : missions) {
             missionPanel.add(new MissionTile(mission, this));
         }
 
-        // Wrap the mission panel in a scroll pane
         JScrollPane scrollPane = new JScrollPane(missionPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -54,8 +51,9 @@ public class MainScreen extends JFrame {
         cardLayout.show(mainPanel, "MissionPanel");
     }
 
-    public void showAstronautDetail(CrewMember crewMember) {
-        astronautDetailScreen.updateAstronautDetails(crewMember);
+    public void showAstronautDetail(CrewMember crewMember, Mission mission) {
+        astronautDetailScreen.updateAstronautDetails(crewMember, mission);
         cardLayout.show(mainPanel, "AstronautDetailScreen");
     }
+
 }

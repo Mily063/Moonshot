@@ -12,22 +12,23 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.example.moonshot.models.CrewMember;
+import org.example.moonshot.models.Mission;
 
 public class AstronautDetailScreen extends JPanel {
     private JTextArea descriptionArea;
     private JScrollPane descriptionScrollPane;
     private JLabel imageLabel;
+    private JButton missionButton;
+    private Mission mission;
 
     public AstronautDetailScreen(MainScreen mainScreen) {
         setLayout(new BorderLayout());
         setBackground(new Color(20, 20, 40));
 
-        // Top panel for back button
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(20, 20, 40));
 
-        // Back button
-        JButton backButton = new JButton("\u2190 Back"); // Unicode arrow symbol
+        JButton backButton = new JButton("\u2190 Back");
         backButton.setForeground(Color.WHITE); // Change color to white
         backButton.setFont(new Font("Arial", Font.PLAIN, 14));
         backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -37,23 +38,22 @@ public class AstronautDetailScreen extends JPanel {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                mainScreen.showMissionPanel();
+                if (mission != null) {
+                    mainScreen.showMissionDetail(mission);
+                }
             }
         });
         topPanel.add(backButton, BorderLayout.WEST);
 
         add(topPanel, BorderLayout.NORTH);
 
-        // Center panel for image and description
         JPanel centerPanel = new JPanel(new BorderLayout());
         centerPanel.setBackground(new Color(20, 20, 40));
 
-        // Image label
         imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         centerPanel.add(imageLabel, BorderLayout.NORTH);
 
-        // Description area
         descriptionArea = new JTextArea();
         descriptionArea.setForeground(Color.WHITE);
         descriptionArea.setBackground(new Color(20, 20, 40));
@@ -64,19 +64,37 @@ public class AstronautDetailScreen extends JPanel {
         descriptionScrollPane = new JScrollPane(descriptionArea);
         centerPanel.add(descriptionScrollPane, BorderLayout.CENTER);
 
+        missionButton = new JButton("Show Mission Details");
+        missionButton.setForeground(Color.WHITE);
+        missionButton.setBackground(new Color(30, 30, 50));
+        missionButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        missionButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        missionButton.setFocusPainted(false);
+        missionButton.setContentAreaFilled(false);
+        missionButton.setBorderPainted(false);
+        missionButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (mission != null) {
+                    mainScreen.showMissionDetail(mission);
+                }
+            }
+        });
+        centerPanel.add(missionButton, BorderLayout.SOUTH);
+
         add(centerPanel, BorderLayout.CENTER);
     }
 
-    public void updateAstronautDetails(CrewMember crewMember) {
+    public void updateAstronautDetails(CrewMember crewMember, Mission mission) {
+        this.mission = mission;
         String description = getAstronautDescription(crewMember.getName());
         descriptionArea.setText(description);
 
-        // Load and set the image
         String imagePath = "src/main/resources/Images/" + crewMember.getName() + ".imageset/" + crewMember.getName() + "@2x.jpg";
         if (new File(imagePath).exists()) {
             ImageIcon astronautImage = new ImageIcon(imagePath);
-            Image scaledImage = astronautImage.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH); // Increase image size
-            imageLabel.setIcon(new ImageIcon(scaledImage));
+            Image scaledImage = astronautImage.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new RoundImageIcon(scaledImage, 50));
         } else {
             imageLabel.setText("No Image Available");
             imageLabel.setForeground(Color.RED);

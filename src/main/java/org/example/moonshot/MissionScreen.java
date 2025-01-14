@@ -25,13 +25,11 @@ public class MissionScreen extends JPanel {
         setLayout(new BorderLayout());
         setBackground(new Color(20, 20, 40));
 
-        // Top panel for back button and title
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(20, 20, 40));
 
-        // Fancy back button
-        backButton = new JButton("\u2190 Back"); // Unicode arrow symbol
-        backButton.setForeground(Color.WHITE); // Change color to white
+        backButton = new JButton("\u2190 Back");
+        backButton.setForeground(Color.WHITE);
         backButton.setFont(new Font("Arial", Font.PLAIN, 14));
         backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         backButton.setFocusPainted(false);
@@ -45,7 +43,6 @@ public class MissionScreen extends JPanel {
         });
         topPanel.add(backButton, BorderLayout.WEST);
 
-        // Mission title
         titleLabel = new JLabel();
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setHorizontalAlignment(JLabel.CENTER); // Center align
@@ -54,46 +51,41 @@ public class MissionScreen extends JPanel {
 
         add(topPanel, BorderLayout.NORTH);
 
-        // Mission info panel
         JPanel missionInfoPanel = new JPanel(new GridBagLayout());
         missionInfoPanel.setBackground(new Color(20, 20, 40));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 10, 0, 10); // Zero padding above title and below back button
+        gbc.insets = new Insets(0, 10, 0, 10);
 
-        // Mission logo
         imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 3;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(20, 10, 20, 10); // Increase padding above and below the logo
+        gbc.insets = new Insets(20, 10, 20, 10);
         missionInfoPanel.add(imageLabel, gbc);
 
-        // Light gray separator line below the logo
         JSeparator separator1 = new JSeparator();
-        separator1.setForeground(new Color(189, 189, 189)); // Light gray color
-        separator1.setPreferredSize(new Dimension(1, 5)); // Set height to 1 pixel
+        separator1.setForeground(new Color(189, 189, 189));
+        separator1.setPreferredSize(new Dimension(1, 5));
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 3;
-        gbc.insets = new Insets(0, 10, 0, 10); // Set insets to 0 above and below
+        gbc.insets = new Insets(0, 10, 0, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         missionInfoPanel.add(separator1, gbc);
 
-        // Mission Highlights label
         JLabel highlightsLabel = new JLabel("Mission Highlights");
         highlightsLabel.setForeground(Color.WHITE);
         highlightsLabel.setFont(new Font("Arial", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 3;
-        gbc.insets = new Insets(10, 10, 10, 10); // Reset insets
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;
         missionInfoPanel.add(highlightsLabel, gbc);
 
-        // Mission launch date
         dateLabel = new JLabel();
         dateLabel.setForeground(Color.LIGHT_GRAY);
         dateLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -104,7 +96,6 @@ public class MissionScreen extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         missionInfoPanel.add(dateLabel, gbc);
 
-        // Mission description
         descriptionArea = new JTextArea();
         descriptionArea.setForeground(Color.WHITE);
         descriptionArea.setBackground(new Color(20, 20, 40));
@@ -112,8 +103,8 @@ public class MissionScreen extends JPanel {
         descriptionArea.setLineWrap(true);
         descriptionArea.setWrapStyleWord(true);
         descriptionArea.setEditable(false);
-        descriptionArea.setBorder(BorderFactory.createLineBorder(new Color(128, 0, 128), 1, true)); // Purple border
-        descriptionArea.setMargin(new Insets(5, 10, 5, 5)); // Add small margin between text and border, with larger left margin
+        descriptionArea.setBorder(BorderFactory.createLineBorder(new Color(128, 0, 128), 1, true));
+        descriptionArea.setMargin(new Insets(5, 10, 5, 5));
         descriptionScrollPane = new JScrollPane(descriptionArea);
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -123,29 +114,26 @@ public class MissionScreen extends JPanel {
         gbc.weighty = 1.0;
         missionInfoPanel.add(descriptionScrollPane, gbc);
 
-        // Light gray separator line below the description
         JSeparator separator2 = new JSeparator();
-        separator2.setForeground(new Color(189, 189, 189)); // Light gray color
-        separator2.setPreferredSize(new Dimension(1, 5)); // Set height to 1 pixel
+        separator2.setForeground(new Color(189, 189, 189));
+        separator2.setPreferredSize(new Dimension(1, 5));
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 3;
-        gbc.insets = new Insets(0, 10, 0, 10); // Set insets to 0 above and below
+        gbc.insets = new Insets(0, 10, 0, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         missionInfoPanel.add(separator2, gbc);
 
-        // Crew label
         JLabel crewLabel = new JLabel("Crew");
         crewLabel.setForeground(Color.WHITE);
         crewLabel.setFont(new Font("Arial", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 6;
         gbc.gridwidth = 3;
-        gbc.insets = new Insets(5, 10, 5, 10); // Reduce insets
+        gbc.insets = new Insets(5, 10, 5, 10);
         gbc.anchor = GridBagConstraints.CENTER;
         missionInfoPanel.add(crewLabel, gbc);
 
-        // Crew panel
         crewPanel = new JPanel();
         crewPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
         crewPanel.setBackground(new Color(20, 20, 40));
@@ -159,10 +147,9 @@ public class MissionScreen extends JPanel {
         gbc.weighty = 0;
         missionInfoPanel.add(crewScrollPane, gbc);
 
-        // Split pane to separate mission info and crew sections
         splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, missionInfoPanel, crewScrollPane);
-        splitPane.setResizeWeight(0.8); // Adjust the resize weight as needed
-        splitPane.setDividerSize(0); // Remove the divider
+        splitPane.setResizeWeight(0.8);
+        splitPane.setDividerSize(0);
         add(splitPane, BorderLayout.CENTER);
     }
 
@@ -189,7 +176,6 @@ public class MissionScreen extends JPanel {
 
         descriptionArea.setText(mission.getDescription());
 
-        // Update crew panel
         crewPanel.removeAll();
         int buttonWidth = 200;
         int buttonHeight = 100;
@@ -203,28 +189,27 @@ public class MissionScreen extends JPanel {
             crewButton.setBackground(new Color(30, 30, 50));
             crewButton.setForeground(Color.WHITE);
             crewButton.setFont(new Font("Arial", Font.PLAIN, 16));
-            crewButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight)); // Increase button size
-            crewButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
-            crewButton.setBorder(BorderFactory.createLineBorder(new Color(75, 0, 130), 1, true)); // Purple rounded border
+            crewButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+            crewButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            crewButton.setBorder(BorderFactory.createLineBorder(new Color(75, 0, 130), 1, true));
 
             JLabel crewImageLabel = new JLabel();
             String crewImagePath = "src/main/resources/Images/" + crewMember.getName() + ".imageset/" + crewMember.getName() + "@2x.jpg";
             if (new File(crewImagePath).exists()) {
                 ImageIcon crewImage = new ImageIcon(crewImagePath);
                 Image scaledCrewImage = crewImage.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-                crewImageLabel.setIcon(new RoundImageIcon(scaledCrewImage, 25)); // Use RoundImageIcon with corner radius 25
+                crewImageLabel.setIcon(new RoundImageIcon(scaledCrewImage, 25));
             } else {
                 crewImageLabel.setText("No Image");
                 crewImageLabel.setForeground(Color.RED);
             }
-            crewImageLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // Add padding
+            crewImageLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-            // Capitalize the first letter of the crew member's name
             String crewName = crewMember.getName().substring(0, 1).toUpperCase() + crewMember.getName().substring(1).toLowerCase();
             JLabel crewNameLabel = new JLabel(crewName);
             crewNameLabel.setForeground(Color.WHITE);
             crewNameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-            crewNameLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // Add padding
+            crewNameLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
             crewButton.add(crewImageLabel, BorderLayout.WEST);
             crewButton.add(crewNameLabel, BorderLayout.CENTER);
@@ -232,7 +217,7 @@ public class MissionScreen extends JPanel {
             crewButton.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    mainScreen.showAstronautDetail(crewMember);
+                    mainScreen.showAstronautDetail(crewMember, mission);
                 }
             });
 
@@ -241,7 +226,7 @@ public class MissionScreen extends JPanel {
         crewPanel.revalidate();
         crewPanel.repaint();
 
-        // Scroll to the top of the description and crew panels
+
         descriptionScrollPane.getVerticalScrollBar().setValue(0);
         crewScrollPane.getHorizontalScrollBar().setValue(0);
     }
