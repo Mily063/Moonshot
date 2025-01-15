@@ -16,17 +16,15 @@ public class MissionTile extends JPanel {
     public MissionTile(Mission mission, MainScreen mainScreen) {
         setLayout(new BorderLayout());
         setBackground(new Color(30, 30, 50));
-        setBorder(new RoundedBorder(15)); // Set rounded border with radius 15
-        setPreferredSize(new Dimension(200, 300)); // Adjust tile size
+        setBorder(new RoundedBorder(15));
+        setPreferredSize(new Dimension(200, 300));
 
-        // Mission name
         JLabel nameLabel = new JLabel("Apollo " + mission.getId());
         nameLabel.setForeground(Color.WHITE);
         nameLabel.setHorizontalAlignment(JLabel.CENTER);
         nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
         nameLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
 
-        // Load mission image
         String imagePath = "src/main/resources/Images/apollo" + mission.getId() + ".imageset/apollo" + mission.getId() + "@2x.png";
         ImageIcon missionImage = new ImageIcon(imagePath);
         Image scaledImage = missionImage.getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
@@ -34,14 +32,13 @@ public class MissionTile extends JPanel {
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         imageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
 
-        // Mission number
         JLabel numberLabel = new JLabel("Mission #" + mission.getId());
         numberLabel.setForeground(Color.WHITE);
         numberLabel.setHorizontalAlignment(JLabel.CENTER);
         numberLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         numberLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
 
-        // Mission launch date
+
         String launchDateString = mission.getLaunchDate();
         Date launchDate = null;
         String formattedDate = "Unknown";
@@ -59,13 +56,11 @@ public class MissionTile extends JPanel {
         dateLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         dateLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
 
-        // Add components
         add(nameLabel, BorderLayout.NORTH);
         add(imageLabel, BorderLayout.CENTER);
         add(numberLabel, BorderLayout.SOUTH);
         add(dateLabel, BorderLayout.SOUTH);
 
-        // Add mouse click listener to switch to MissionDetailScreen
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -73,8 +68,7 @@ public class MissionTile extends JPanel {
             }
         });
     }
-
-    // Custom border class for rounded corners
+    
     private static class RoundedBorder extends AbstractBorder {
         private final int radius;
 
