@@ -47,6 +47,7 @@ public class MissionScreen extends JPanel {
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setHorizontalAlignment(JLabel.CENTER); // Center align
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 75));
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
         add(topPanel, BorderLayout.NORTH);

@@ -38,7 +38,9 @@ public class AstronautDetailScreen extends JPanel {
         backButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                mainScreen.showMissionPanel();
+                if (mission != null) {
+                    mainScreen.showMissionDetail(mission);
+                }
             }
         });
         topPanel.add(backButton, BorderLayout.WEST);
@@ -108,7 +110,7 @@ public class AstronautDetailScreen extends JPanel {
         if (new File(imagePath).exists()) {
             ImageIcon astronautImage = new ImageIcon(imagePath);
             Image scaledImage = astronautImage.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-            imageLabel.setIcon(new RoundImageIcon(scaledImage, 50)); // Use RoundImageIcon with corner radius
+            imageLabel.setIcon(new RoundImageIcon(scaledImage, 50));
         } else {
             imageLabel.setIcon(null);
         }
